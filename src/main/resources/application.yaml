@@ -38,5 +38,5 @@ loggers:
 ---
 local:
   enabled: true
-  baseFolder: /home/stefanwiedemann/git/wistefan/temporal-file-api/target
+  baseFolder: ./target
   baseAddress: http://localhost:7070/

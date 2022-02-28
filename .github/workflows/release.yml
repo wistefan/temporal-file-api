@@ -35,7 +35,7 @@ jobs:
         run: echo "::set-output name=version::$(echo ${VERSION})"
 
   # image build&push
-  notification-proxy:
+  api:
     needs: [ "generate-version" ]
     runs-on: ubuntu-latest
 
