@@ -64,7 +64,7 @@ jobs:
           mvn clean install deploy -DskipTests -Pdocker -Dimage.tag=${{ needs.generate-version.outputs.version }} -Dimage.registry="${{ env.REGISTRY }}" -Dimage.repository="${{ env.REPOSITORY }}"
 
   git-release:
-    needs: ["generate-version","notification-proxy"]
+    needs: ["generate-version","api"]
     runs-on: ubuntu-latest
 
     steps:
