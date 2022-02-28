@@ -7,21 +7,25 @@ import org.fiware.ngsi.api.TemporalApi;
 import org.fiware.ngsi.api.TemporalApiClient;
 import org.fiware.ngsi.model.QueryVO;
 import org.fiware.ngsi.model.TimerelVO;
+import org.fiware.tfa.service.TemporalQueryFileService;
 
 import javax.annotation.Nullable;
 import java.net.URI;
 import java.time.Instant;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 public class TemporalApiController implements TemporalApi {
 
 	private final TemporalApiClient temporalApiClient;
+	private final TemporalQueryFileService temporalQueryFileService;
 
 	@Override
 	public HttpResponse<Object> queryTemporalEntities(@Nullable String link, @Nullable String id, @Nullable String idPattern, @Nullable String type, @Nullable String attrs, @Nullable String q, @Nullable String georel, @Nullable String geometry, @Nullable String coordinates, @Nullable String geoproperty, @Nullable TimerelVO timerel, @Nullable String timeproperty, @Nullable Instant timeAt, @Nullable Instant endTimeAt, @Nullable String csf, @Nullable Integer pageSize, @Nullable URI pageAnchor, @Nullable Integer limit, @Nullable String options, @Nullable Integer lastN, @Nullable String ngSILDTenant, @Nullable Boolean fileResponse) {
+		fileResponse = Optional.ofNullable(fileResponse).orElse(false);
 		if (fileResponse) {
-			return HttpResponse.noContent().header("Location", URI.create("").toString());
+			return temporalQueryFileService.queryTemporalEntities(link, id, idPattern, type, attrs, q, georel, geometry, coordinates, geoproperty, timerel, timeproperty, timeAt, endTimeAt, csf, pageSize, pageAnchor, limit, options, lastN, ngSILDTenant, true);
 		} else {
 			return temporalApiClient.queryTemporalEntities(link, id, idPattern, type, attrs, q, georel, geometry, coordinates, geoproperty, timerel, timeproperty, timeAt, endTimeAt, csf, pageSize, pageAnchor, limit, options, lastN, ngSILDTenant, null);
 		}
@@ -29,6 +33,7 @@ public class TemporalApiController implements TemporalApi {
 
 	@Override
 	public HttpResponse<Object> queryTemporalEntitiesOnPost(QueryVO queryVO, @Nullable String link, @Nullable Integer pageSize, @Nullable URI pageAnchor, @Nullable Integer limit, @Nullable String options, @Nullable Integer lastN, @Nullable String ngSILDTenant, @Nullable Boolean fileResponse) {
+		fileResponse = Optional.ofNullable(fileResponse).orElse(false);
 		if (fileResponse) {
 			return HttpResponse.noContent().header("Location", URI.create("").toString());
 		} else {
@@ -38,6 +43,7 @@ public class TemporalApiController implements TemporalApi {
 
 	@Override
 	public HttpResponse<Object> retrieveEntityTemporalById(URI entityId, @Nullable String link, @Nullable String attrs, @Nullable String options, @Nullable TimerelVO timerel, @Nullable String timeproperty, @Nullable Instant timeAt, @Nullable Instant endTimeAt, @Nullable Integer lastN, @Nullable String ngSILDTenant, @Nullable Boolean fileResponse) {
+		fileResponse = Optional.ofNullable(fileResponse).orElse(false);
 		if (fileResponse) {
 			return HttpResponse.noContent().header("Location", URI.create("").toString());
 		} else {

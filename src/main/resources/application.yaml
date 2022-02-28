@@ -1,0 +1,42 @@
+micronaut:
+  application:
+    name: ${project.artifactId}
+
+  server:
+    port: 7070
+
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        step: PT2s
+        descriptions: false
+
+  http:
+    services:
+      read-timeout: 30s
+      mintaka:
+        path: /
+        url: http://localhost:8080
+        read-timeout: 30
+
+---
+endpoints:
+  metrics:
+    enabled: true
+  health:
+    enabled: true
+  info:
+    enabled: true
+    sensitive: false
+
+---
+loggers:
+  levels:
+    ROOT: TRACE
+
+---
+local:
+  enabled: true
+  baseFolder: /home/stefanwiedemann/git/wistefan/temporal-file-api/target
+  baseAddress: http://localhost:7070/

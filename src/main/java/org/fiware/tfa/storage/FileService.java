@@ -1,8 +1,11 @@
 package org.fiware.tfa.storage;
 
+import java.net.URL;
+
 public interface FileService {
 
-	void startFile(String path, Object object);
+	void appendToFile(String path, Object object);
 
-	void appendFile(String path, Object object);
+	URL getLocation(String id);
+
 }
