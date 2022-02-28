@@ -16,3 +16,5 @@ following configurations need to be set:
 | `local.enabled`        | `LOCAL_ENABLED` | Should the local storage be enabled.    |  true  |
 | `local.baseFolder`        | `LOCAL_BASE_FOLDER` | Folder to be used for storing the generated files.    |  /responses  |
 | `local.baseAddress`        | `LOCAL_BASE_ADDRESS` | Address of the Temporal-File API to generate the location headers for accesing the files.   |  http://localhost:7070/  |
+
+## Demo
